@@ -32,6 +32,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// $(".owl-carousel").owlCarousel({
+//   loop: false,
+//   margin: 12,
+//   nav: true,
+//   responsive: {
+//     0: {
+//       item: 1,
+//     },
+//     600: {
+//       items: 3,
+//     },
+//     1000: {
+//       items: 5,
+//     },
+//   },
+// });
+
 let darkModeBtn = document.querySelector(".dark-mode");
 
 darkModeBtn.addEventListener("click", function () {
@@ -247,3 +264,21 @@ if (savedIndex !== null) {
 } else {
   setActiveDot(0); // по умолчанию активна первая
 }
+
+const btn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    // если прокрутили вниз больше 200px
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+});
+
+btn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
