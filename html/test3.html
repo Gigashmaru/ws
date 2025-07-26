@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Бум и Победа</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #222;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+        color: white;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      button#boomButton {
+        padding: 15px 30px;
+        font-size: 24px;
+        border: none;
+        border-radius: 10px;
+        background: #4169e1;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 0 15px #4169e1;
+        transition: background-color 0.3s ease;
+        z-index: 10;
+      }
+
+      button#boomButton:hover {
+        background-color: #27408b;
+      }
+
+      #explosion {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, #ffdd55 0%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        pointer-events: none;
+        opacity: 0;
+        z-index: 1000;
+      }
+
+      #explosion.active {
+        animation: boomExpand 0.6s forwards;
+        opacity: 1;
+      }
+
+      @keyframes boomExpand {
+        0% {
+          width: 0;
+          height: 0;
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(0);
+        }
+        100% {
+          width: 200vw;
+          height: 200vh;
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      @keyframes glowPulse {
+        0%,
+        100% {
+          text-shadow: 0 0 20px #fff000, 0 0 40px #ffcc00, 0 0 60px #ffa500,
+            0 0 80px #ff9900;
+        }
+        50% {
+          text-shadow: 0 0 10px #fff000, 0 0 20px #ffd700, 0 0 30px #ffa500,
+            0 0 40px #ff6600;
+        }
+      }
+
+      #winMessage {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 80px;
+        font-weight: 900;
+        color: #fff200;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1100;
+        transition: opacity 1s ease;
+        text-shadow: 0 0 20px #fff000, 0 0 40px #ffcc00, 0 0 60px #ffa500,
+          0 0 80px #ff9900;
+        animation: glowPulse 2s infinite ease-in-out;
+      }
+
+      #winMessage.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      #winMessage.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="boomButton">Нажми меня!</button>
+
+    <div id="explosion"></div>
+    <div id="winMessage">Вы выиграли!</div>
+
+    <script>
+      const button = document.getElementById("boomButton");
+      const explosion = document.getElementById("explosion");
+      const winMessage = document.getElementById("winMessage");
+
+      button.addEventListener("click", () => {
+        // Скрыть кнопку
+        button.style.display = "none";
+
+        // Взрыв
+        explosion.classList.add("active");
+
+        // Показать "Вы выиграли!" через 0.6с
+        setTimeout(() => {
+          explosion.style.opacity = "0";
+          winMessage.classList.add("visible");
+        }, 600);
+
+        // Через 5 секунд скрыть сообщение и вернуть кнопку
+        setTimeout(() => {
+          winMessage.classList.remove("visible");
+          winMessage.classList.add("fade-out");
+
+          // Вернуть всё в начальное состояние
+          setTimeout(() => {
+            explosion.classList.remove("active");
+            explosion.style.opacity = "0";
+            winMessage.classList.remove("fade-out");
+            button.style.display = "inline-block";
+          }, 1000); // дождаться плавного исчезновения текста
+        }, 5600); // 600мс (задержка) + 5000мс (показ)
+      });
+    </script>
+  </body>
+</html>

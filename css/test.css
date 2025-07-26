@@ -1,0 +1,65 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0; /* светлый фон */
+  color: #222;
+  padding: 40px 20px;
+}
+
+.dot-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #555;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); /* легкая тень */
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.dot.active {
+  background-color: #4169e1;
+  box-shadow: 0 0 12px #4169e1;
+}
+
+.slider-container {
+  width: 220px;
+  margin: 0 auto;
+  display: none; /* скрыто по умолчанию */
+}
+
+#avatar {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 25px #4169e1; /* свет вокруг картинки */
+  user-select: none;
+}
+
+@keyframes neonGlow {
+  0%,
+  100% {
+    background-color: #f0f0f0;
+    box-shadow: 0 0 10px #4169e1;
+  }
+  50% {
+    background-color: #d0e6ff;
+    box-shadow: 0 0 30px #4169e1;
+  }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+  color: #222;
+  padding: 40px 20px;
+  animation: neonGlow 4s ease-in-out infinite;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Уютный красивый Loading</title>
+    <style>
+      /* Плавное вращение */
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Мягкое пульсирующее свечение */
+      @keyframes softGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 15px 5px rgba(106, 90, 205, 0.4),
+            0 0 30px 10px rgba(123, 104, 238, 0.3),
+            0 0 45px 15px rgba(138, 43, 226, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 25px 10px rgba(106, 90, 205, 0.7),
+            0 0 50px 20px rgba(123, 104, 238, 0.5),
+            0 0 75px 30px rgba(138, 43, 226, 0.4);
+        }
+      }
+
+      /* Медленное переливание градиента фона */
+      @keyframes backgroundFlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      /* Плавное исчезновение */
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(270deg, #8a2be2, #6a5acd, #7b68ee, #483d8b);
+        background-size: 800% 800%;
+        animation: backgroundFlow 20s ease infinite;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #eee;
+        user-select: none;
+      }
+
+      .loader {
+        width: 120px;
+        height: 120px;
+        border: 12px solid rgba(123, 104, 238, 0.25);
+        border-top: 12px solid #7b68ee;
+        border-radius: 50%;
+        animation: spin 3s linear infinite, softGlow 4s ease-in-out infinite;
+        box-shadow: 0 0 20px rgba(123, 104, 238, 0.4),
+          0 0 40px rgba(138, 43, 226, 0.3);
+        /* Чтобы можно было плавно скрыть */
+        opacity: 1;
+        transition: opacity 1s ease;
+      }
+
+      .loader.fade-out {
+        animation: none; /* остановим анимации спиннера */
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader" id="loader"></div>
+
+    <script>
+      // Через 2 секунды запускаем плавное исчезновение
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          const loader = document.getElementById("loader");
+          loader.classList.add("fade-out");
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>
