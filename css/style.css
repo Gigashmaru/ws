@@ -690,14 +690,24 @@ a {
   flex-direction: column;
 }
 
+/* Footer */
 footer {
-  border-top: 1px solid white;
   text-align: center;
-  background-color: rgba(11, 11, 11, 1);
+  padding: 20px;
+  background-color: black;
+  font-size: 14px;
   color: white;
-  margin-top: 94px;
-  padding: 23px 0 24px;
-  width: 100%;
+}
+
+.github-link {
+  text-decoration: none;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.github-link:hover {
+  text-decoration: underline;
 }
 
 /* круги */
