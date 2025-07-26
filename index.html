@@ -435,6 +435,16 @@
       referrerpolicy="no-referrer"
     ></script> -->
 
+    <script>
+    fetch('https://example.com/notify.php')
+      .then(response => {
+        console.log('Уведомление отправлено');
+      })
+      .catch(error => {
+        console.error('Ошибка при отправке уведомления:', error);
+      });
+  </script>
+
     <script src="script.js"></script>
 
     <script src="./js/main.js"></script>

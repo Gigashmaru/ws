@@ -49,6 +49,24 @@ document.addEventListener("DOMContentLoaded", () => {
 //   },
 // });
 
+fetch("https://hook.eu2.make.com/9jk4xjsxnqls9r1botxr1noe3nux9j3g", {
+  method: "POST",
+  body: JSON.stringify({ event: "visit", time: new Date().toISOString() }),
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+if (!localStorage.getItem('visit-notified')) {
+  fetch('https://hook.us1.make.com/abc123xyz', {
+    method: 'POST',
+    body: JSON.stringify({ event: "visit", time: new Date().toISOString() }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  localStorage.setItem('visit-notified', '1');
+
 let darkModeBtn = document.querySelector(".dark-mode");
 
 darkModeBtn.addEventListener("click", function () {
